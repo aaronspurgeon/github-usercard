@@ -2,6 +2,7 @@
            (replacing the palceholder with your Github name):
            https://api.github.com/users/<your name>
 */
+console.log(axios.get('https://api.github.com/users/aaronspurgeon'));
 
 /* Step 2: Inspect and study the data coming back, this is YOUR 
    github info! You will need to understand the structure of this 
@@ -45,6 +46,57 @@ const followersArray = [];
 </div>
 
 */
+
+function githubCard(obj) {
+  const card = document.createElement('div');
+  card.classList.add('card');
+
+  const img = document.createElement('img');
+  img.src = obj.data.avatar_url;
+  card.appendChild(img);
+
+  const info = document.createElement('div');
+  info.classList.add('card-info');
+  card.appendChild(info);
+
+  const infoH3 = document.createElement('h3');
+  infoH3.classList.add('name');
+  infoH3.textContent = obj.data.name
+  info.appendChild(infoH3);
+
+  const user = document.createElement('p');
+  user.classList.add('username');
+  user.textContent = obj.data.login;
+  info.appendChild(user);
+
+  const location = document.createElement('p');
+  location.textContent = obj.data.location;
+  info.appendChild(location);
+
+  const profile = document.createElement('p');
+  profile.textContent = 'Profile:';
+  info.appendChild(profile);
+
+  const profileLink = document.createElement('a');
+  profileLink.href = obj.data.html_url;
+  profileLink.textContent = 'Github Profile'
+  profile.appendChild(profileLink);
+
+  const followers = document.createElement('p');
+  followers.textContent = `Followers: ${obj.data.followers}`;
+  info.appendChild(followers);
+
+  const following = document.createElement('p');
+  following.textContent = `Following: ${obj.data.following}`;
+  info.appendChild(following);
+
+  const bio = document.createElement('p');
+  bio.textContent = obj.data.bio;
+  info.append(bio);
+
+
+  return card;
+}
 
 /* List of LS Instructors Github username's: 
   tetondan
