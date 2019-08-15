@@ -15,6 +15,7 @@
            create a new component and add it to the DOM as a child of .cards
 */
 const container = document.querySelector('.cards');
+const wholeContainer = document.querySelector('.container');
 axios.get('https://api.github.com/users/aaronspurgeon')
   .then((resp) => {
     container.appendChild(githubCard(resp));
@@ -30,7 +31,27 @@ axios.get('https://api.github.com/users/aaronspurgeon')
           user, and adding that card to the DOM.
 */
 
-const followersArray = [];
+const followersArray = [
+  'https://api.github.com/users/Amber-Pittman',
+  'https://api.github.com/users/nickdurbin',
+  'https://api.github.com/users/leachcoding',
+  'https://api.github.com/users/clifhodges13',
+  'https://api.github.com/users/mnichols08'
+];
+
+const btn = document.createElement('button');
+btn.textContent = 'Show My Followers';
+btn.classList.add('show-more-btn');
+wholeContainer.appendChild(btn);
+
+btn.addEventListener('click', () => {
+  followersArray.forEach((item) => {
+    axios.get(item)
+      .then((resp) => {
+        container.appendChild(githubCard(resp));
+      })
+  })
+})
 
 /* Step 3: Create a function that accepts a single object as its only argument,
           Using DOM methods and properties, create a component that will return the following DOM element:
@@ -84,7 +105,7 @@ function githubCard(obj) {
 
   const profileLink = document.createElement('a');
   profileLink.href = obj.data.html_url;
-  profileLink.textContent = 'Github Profile'
+  profileLink.textContent = ` ${obj.data.html_url}`
   profile.appendChild(profileLink);
 
   const followers = document.createElement('p');
