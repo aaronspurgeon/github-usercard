@@ -2,7 +2,7 @@
            (replacing the palceholder with your Github name):
            https://api.github.com/users/<your name>
 */
-// console.log(axios.get('https://api.github.com/users/aaronspurgeon'));
+console.log(axios.get('https://api.github.com/users/aaronspurgeon'));
 
 /* Step 2: Inspect and study the data coming back, this is YOUR 
    github info! You will need to understand the structure of this 
@@ -51,7 +51,8 @@ btn.addEventListener('click', () => {
         container.appendChild(githubCard(resp));
       })
   })
-})
+  btn.style.display = 'none';
+});
 
 /* Step 3: Create a function that accepts a single object as its only argument,
           Using DOM methods and properties, create a component that will return the following DOM element:
